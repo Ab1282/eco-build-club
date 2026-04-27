@@ -12,6 +12,7 @@ import {
   Building2, 
   Calendar, 
   Instagram, 
+  Facebook,
   Mail, 
   ArrowRight,
   ArrowLeft,
@@ -360,6 +361,14 @@ const Footer = () => (
         </a>
         <a href="#" className="p-3 bg-cream rounded-full hover:bg-sage/20 transition-colors text-moss">
           <Instagram className="w-6 h-6" />
+        </a>
+        <a href="#" className="p-3 bg-cream rounded-full hover:bg-sage/20 transition-colors text-moss">
+          <Facebook className="w-6 h-6" />
+        </a>
+        <a href="#" className="p-3 bg-cream rounded-full hover:bg-sage/20 transition-colors text-moss">
+          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.04-4.98 4.83 4.83 0 0 1 3.71 4.23l.01-3.63a4.83 4.83 0 0 1 4.8-4.15h1.9zm-6.08 3.38a3.39 3.39 0 0 0 1.27-2.23V6.08h1.8a4.83 4.83 0 0 1 0 9.66h-1.8v2.38a3.39 3.39 0 0 0-1.27-2.23z"/>
+          </svg>
         </a>
       </div>
 
