@@ -47,7 +47,7 @@ const activities: Activity[] = [
   },
   {
     title: 'Ateliers Pratiques',
-    description: 'Apprenez les techniques de construction en terre crue, bois et isolation biosourcée lors de nos sessions hands-on.',
+    description: "Le Master BD2EAT partage son savoir-faire : workshops, retours d'expérience et échanges avec des acteurs du bâtiment responsable.",
     icon: HardHat,
   },
   {
