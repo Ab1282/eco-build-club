@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Menu, 
@@ -347,85 +347,115 @@ const Team = () => {
   );
 };
 
-const ContactForm = () => (
-  <section id="contact-form" className="py-24 bg-cream/30">
-    <div className="max-w-3xl mx-auto px-6">
-      <div className="bg-white rounded-lg shadow-md p-8">
-        <h2 className="text-2xl font-bold text-forest mb-8">Envoyez-nous un message</h2>
-        
-        <form 
-          name="contact" 
-          method="POST" 
-          data-netlify="true"
-          action="/"
-          className="flex flex-col gap-6"
-        >
-          <input type="hidden" name="form-name" value="contact" />
+const ContactForm = () => {
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    const data = new URLSearchParams();
+    
+    formData.forEach((value, key) => {
+      data.append(key, value as string);
+    });
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: data.toString()
+    })
+    .then(() => {
+      alert("✅ Merci ! Votre message a bien été envoyé à l'Eco Build Club.");
+      form.reset();
+    })
+    .catch(() => {
+      alert("Oups, une erreur s'est produite lors de l'envoi.");
+    });
+  };
+
+  return (
+    <section id="contact-form" className="py-24 bg-cream/30">
+      <div className="max-w-3xl mx-auto px-6">
+        <div className="bg-white rounded-lg shadow-md p-8">
+          <h2 className="text-2xl font-bold text-forest mb-8">Envoyez-nous un message</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <form 
+            ref={formRef}
+            name="contact" 
+            method="POST" 
+            data-netlify="true"
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-6"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="name" className="text-sm font-semibold text-forest">Nom complet *</label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  name="name" 
+                  placeholder="Votre nom" 
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-moss focus:border-transparent transition-all"
+                />
+              </div>
+              
+              <div className="flex flex-col gap-2">
+                <label htmlFor="email" className="text-sm font-semibold text-forest">Email *</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  placeholder="votre@email.com" 
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-moss focus:border-transparent transition-all"
+                />
+              </div>
+            </div>
+            
             <div className="flex flex-col gap-2">
-              <label htmlFor="name" className="text-sm font-semibold text-forest">Nom complet *</label>
+              <label htmlFor="subject" className="text-sm font-semibold text-forest">Sujet *</label>
               <input 
                 type="text" 
-                id="name" 
-                name="name" 
-                placeholder="Votre nom" 
+                id="subject" 
+                name="subject" 
+                placeholder="Sujet de votre message" 
                 required
                 className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-moss focus:border-transparent transition-all"
               />
             </div>
             
             <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="text-sm font-semibold text-forest">Email *</label>
-              <input 
-                type="email" 
-                id="email" 
-                name="email" 
-                placeholder="votre@email.com" 
+              <label htmlFor="message" className="text-sm font-semibold text-forest">Message *</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                placeholder="Votre message..." 
+                rows={5}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-moss focus:border-transparent transition-all"
+                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-moss focus:border-transparent transition-all resize-none"
               />
             </div>
-          </div>
+            
+            <button 
+              type="submit"
+              className="w-full bg-forest text-white px-6 py-4 rounded-md font-semibold hover:bg-moss transition-colors flex items-center justify-center gap-2"
+            >
+              <Send className="w-5 h-5" />
+              Envoyer le message
+            </button>
+          </form>
           
-          <div className="flex flex-col gap-2">
-            <label htmlFor="subject" className="text-sm font-semibold text-forest">Sujet *</label>
-            <input 
-              type="text" 
-              id="subject" 
-              name="subject" 
-              placeholder="Sujet de votre message" 
-              required
-              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-moss focus:border-transparent transition-all"
-            />
-          </div>
-          
-          <div className="flex flex-col gap-2">
-            <label htmlFor="message" className="text-sm font-semibold text-forest">Message *</label>
-            <textarea 
-              id="message" 
-              name="message" 
-              placeholder="Votre message..." 
-              rows={5}
-              required
-              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-moss focus:border-transparent transition-all resize-none"
-            />
-          </div>
-          
-          <button 
-            type="submit"
-            className="w-full bg-forest text-white px-6 py-4 rounded-md font-semibold hover:bg-moss transition-colors flex items-center justify-center gap-2"
-          >
-            <Send className="w-5 h-5" />
-            Envoyer le message
-          </button>
-        </form>
-        
-        <p className="text-center text-sm text-gray-500 mt-4">* Champs obligatoires</p>
+          <p className="text-center text-sm text-gray-500 mt-4">* Champs obligatoires</p>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const Footer = () => (
   <footer id="contact" className="bg-forest text-white py-16">
