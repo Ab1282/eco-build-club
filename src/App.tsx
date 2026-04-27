@@ -357,6 +357,7 @@ const ContactForm = () => (
           name="contact" 
           method="POST" 
           data-netlify="true"
+          action="/"
           className="flex flex-col gap-6"
         >
           <input type="hidden" name="form-name" value="contact" />
