@@ -92,7 +92,7 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <img src="./logo.png" alt="Eco Build Club" className="w-16 h-16 object-contain" />
+          <img src="/logo.png" alt="Eco Build Club" className="w-16 h-16 object-contain" />
           <span className="text-xl font-bold tracking-tight text-forest">Eco Build Club</span>
         </div>
 
@@ -195,7 +195,7 @@ const Hero = () => (
       >
         <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl relative">
            <img 
-            src="../fste.png" 
+            src="/fste.png" 
             alt="FSTE - École d'Architecture" 
             className="w-full h-full object-contain bg-cream"
           />
