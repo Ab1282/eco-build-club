@@ -67,13 +67,14 @@ const team: TeamMember[] = [
   { name: 'Salka Mouchain', role: 'Présidente - M1 BD2EAT' },
   { name: 'Oussama Bounou', role: 'Vice-Président - M1 BD2EAT' },
   { name: 'Ikram El Ibrahimi', role: 'Secrétaire - M1 BD2EAT' },
+  { name: 'Anass Jourfi', role: 'Membre actif - M1 BD2EAT' },
   { name: 'Aya Berdi', role: 'Trésorière - M1 BD2EAT' },
-  { name: 'Mehdi El Amrani', role: 'Responsable Communication - M1 BD2EAT' },
-  { name: 'Fatima Zahra', role: 'Responsable Événements - M1 BD2EAT' },
-  { name: 'Youssef Khaldi', role: 'Membre actif - M1 BD2EAT' },
-  { name: 'Amina Boutaib', role: 'Membre actif - M1 BD2EAT' },
-  { name: 'Karim Idrissi', role: 'Membre actif - M2 BD2EAT' },
-  { name: 'Leila Mrani', role: 'Membre actif - M2 BD2EAT' },
+  { name: 'Nada Bou-Imesmaren', role: 'Responsable Communication - M1 BD2EAT' },
+  { name: 'Ahlam El Aidouni', role: 'Responsable Événements - M1 BD2EAT' },
+  { name: 'Assif Ahmed', role: 'Membre actif - M1 BD2EAT' },
+  { name: 'Yassine Mebrouk', role: 'Membre actif - M1 BD2EAT' },
+  { name: 'Oussama Abarji', role: 'Membre actif - M1 BD2EAT' },
+  
 ];
 
 // --- Components ---
