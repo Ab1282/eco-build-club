@@ -14,6 +14,7 @@ import {
   Instagram, 
   Mail, 
   ArrowRight,
+  ArrowLeft,
   HardHat,
   MonitorPlay,
   MapPin
@@ -67,6 +68,12 @@ const team: TeamMember[] = [
   { name: 'Oussama Bounou', role: 'Vice-Président - M1 BD2EAT' },
   { name: 'Ikram El Ibrahimi', role: 'Secrétaire - M1 BD2EAT' },
   { name: 'Aya Berdi', role: 'Trésorière - M1 BD2EAT' },
+  { name: 'Mehdi El Amrani', role: 'Responsable Communication - M1 BD2EAT' },
+  { name: 'Fatima Zahra', role: 'Responsable Événements - M1 BD2EAT' },
+  { name: 'Youssef Khaldi', role: 'Membre actif - M1 BD2EAT' },
+  { name: 'Amina Boutaib', role: 'Membre actif - M1 BD2EAT' },
+  { name: 'Karim Idrissi', role: 'Membre actif - M2 BD2EAT' },
+  { name: 'Leila Mrani', role: 'Membre actif - M2 BD2EAT' },
 ];
 
 // --- Components ---
@@ -270,35 +277,70 @@ const Activities = () => (
   </section>
 );
 
-const Team = () => (
-  <section id="team" className="py-24 bg-forest text-cream">
-    <div className="max-w-7xl mx-auto px-6">
-      <div className="text-center mb-16">
-        <h2 className="text-4xl font-bold mb-4">Le Bureau</h2>
-        <p className="text-cream/60">Les visages derrière l'initiative</p>
-      </div>
+const Team = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const cardsPerView = 4;
+  const maxIndex = Math.max(0, team.length - cardsPerView);
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {team.map((member, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
-            className="bg-white/10 backdrop-blur-sm p-8 rounded-3xl text-center border border-white/5 hover:bg-white/20 transition-colors"
+  const scrollLeft = () => setCurrentIndex((prev) => Math.max(0, prev - 1));
+  const scrollRight = () => setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
+
+  return (
+    <section id="team" className="py-24 bg-forest text-cream">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold mb-4">Le Bureau</h2>
+          <p className="text-cream/60">Les visages derrière l'initiative</p>
+        </div>
+
+        <div className="relative">
+          {/* Left Arrow */}
+          <button
+            onClick={scrollLeft}
+            disabled={currentIndex === 0}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-cream rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            <div className="w-20 h-20 bg-cream/20 rounded-full mx-auto mb-6 flex items-center justify-center">
-              <Users className="w-10 h-10 text-cream" />
+            <ArrowRight className="w-6 h-6 text-forest rotate-180" />
+          </button>
+
+          {/* Cards Container */}
+          <div className="overflow-hidden mx-12">
+            <div
+              className="flex gap-8 transition-transform duration-300 ease-out"
+              style={{ transform: `translateX(-${currentIndex * (100 / cardsPerView)}%)` }}
+            >
+              {team.map((member, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex-[0_0_25%] min-w-[250px] bg-white/10 backdrop-blur-sm p-8 rounded-3xl text-center border border-white/5 hover:bg-white/20 transition-colors"
+                >
+                  <div className="w-20 h-20 bg-cream/20 rounded-full mx-auto mb-6 flex items-center justify-center">
+                    <Users className="w-10 h-10 text-cream" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">{member.name}</h3>
+                  <p className="text-sm text-cream/70 uppercase tracking-widest">{member.role}</p>
+                </motion.div>
+              ))}
             </div>
-            <h3 className="text-xl font-bold mb-2">{member.name}</h3>
-            <p className="text-sm text-cream/70 uppercase tracking-widest">{member.role}</p>
-          </motion.div>
-        ))}
+          </div>
+
+          {/* Right Arrow */}
+          <button
+            onClick={scrollRight}
+            disabled={currentIndex === maxIndex}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-cream rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            <ArrowRight className="w-6 h-6 text-forest" />
+          </button>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const Footer = () => (
   <footer id="contact" className="py-12 bg-white border-t border-forest/10">
