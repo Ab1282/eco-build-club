@@ -46,7 +46,7 @@ const activities: Activity[] = [
     icon: MonitorPlay,
   },
   {
-    title: 'Ateliers Pratiques',
+    title: 'Formations Pratiques',
     description: "Le Master BD2EAT partage son savoir-faire : workshops, retours d'expérience et échanges avec des acteurs du bâtiment responsable.",
     icon: HardHat,
   },
