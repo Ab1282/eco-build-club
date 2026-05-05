@@ -8,10 +8,61 @@
   --color-earth: #d4a373;
   --color-cream: #fefae0;
   --color-moss: #588157;
+  /* Dark mode colors */
+  --color-forest-dark: #0d2818;
+  --color-sage-dark: #8a9a6f;
+  --color-earth-dark: #b8935f;
+  --color-cream-dark: #2a2a2a;
+  --color-moss-dark: #4a6b4a;
 }
 
 @layer base {
   body {
-    @apply font-sans bg-cream text-forest selection:bg-sage selection:text-white;
+    @apply font-sans bg-cream text-forest selection:bg-moss selection:text-white transition-colors duration-300;
+  }
+  
+  body.dark {
+    @apply bg-gray-900 text-gray-100 selection:bg-gray-700 selection:text-white;
+  }
+  
+  /* Dark mode specific styles */
+  .dark .bg-white {
+    background-color: rgb(31 41 55);
+  }
+  
+  .dark .bg-white_40 {
+    background-color: rgb(31 41 55 / 0.4);
+  }
+  
+  .dark .bg-white_10 {
+    background-color: rgb(31 41 55 / 0.1);
+  }
+  
+  .dark .bg-cream_30 {
+    background-color: rgb(31 41 55 / 0.3);
+  }
+  
+  .dark .text-forest {
+    color: rgb(243 244 246);
+  }
+  
+  .dark .text-forest_70 {
+    color: rgb(209 213 219);
+  }
+  
+  .dark .text-forest_80 {
+    color: rgb(229 231 235);
+  }
+  
+  .dark .border-white_30 {
+    border-color: rgb(75 85 99);
+  }
+  
+  .dark .border-sage_30 {
+    border-color: rgb(75 85 99);
+  }
+  
+  .dark .shadow-2xl {
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
   }
 }
